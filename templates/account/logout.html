@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+
+{% block title %}
+خروج
+{% endblock %}
+{% block content %}
+<div class="text-center">
+
+    <form action="" method="post">
+    {% csrf_token %}
+        <br>
+        <br>
+        <br>
+        <h1>خروج از حساب کاربری</h1>
+        <h3>آیا میخواهید از حساب کاربری خود خارج شوید؟</h3>
+        <br>
+        <br>
+    <button style="width: 120px" class="btn btn-danger px-3" type="submit"> بله </button>
+        <a style="margin-right: 200px" class="btn btn-info px-3" href="{% url 'blog:home' %}"> بازگشت به خانه </a>
+</form>
+</div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+{% endblock %}

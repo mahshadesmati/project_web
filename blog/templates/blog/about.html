@@ -1,0 +1,102 @@
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}
+درباره من
+{% endblock %}
+
+{% block content %}
+<section class="pt-4">
+	<div class="container">
+		<div class="row">
+      <div class="col-12">
+        <div class="card bg-dark-overlay-4 overflow-hidden card-bg-scale h-400 text-center" style="background-image:url({% static 'images/logo.png' %}); background-position: center left; background-size: cover;">
+          <!-- Card Image overlay -->
+          <div class="card-img-overlay d-flex align-items-center p-3 p-sm-4">
+            <div class="w-100 my-auto">
+              <h1 class="text-white shadow shadow-lg display-4">سیده مهشاد عصمتی مقدم</h1>
+              <!-- breadcrumb -->
+              <nav class="d-flex justify-content-center">
+                <ul style="list-style-type: none">
+                  <li><a style="color: white" href="{% url 'blog:home' %}"><i class="bi bi-house me-1"></i> صفحه اصلی</a></li>
+                  <br>
+                   <li><a style="color: white" href="https://adhosseini.github.io/po"> درس برنامه نویسی وب</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+</section>
+
+    <section class="pb-4">
+	<div class="container">
+		<div class="row g-4">
+			<div class="col-lg-8">
+				<!-- Chart START -->
+				<div class="card border h-100 bg-body-secondary">
+					<!-- Card header -->
+					<div class="card-header border-bottom d-flex justify-content-between align-items-center p-3">
+						<h5 class="card-header-title mb-0">درباره من</h5>
+					</div>
+
+					<!-- Card body -->
+					<div class="card-body">
+						<div class="d-sm-flex justify-content-sm-between align-items-center mb-4">
+							<!-- Avatar detail -->
+							<div class="d-flex align-items-center">
+								<!-- Avatar -->
+								<div class="avatar avatar-lg">
+									<img class="avatar-img rounded-circle border border-white border-3 shadow" src="{% static 'images/logo2.png' %}" alt="">
+								</div>
+								<!-- Info -->
+								<div style="margin-right: 10px" class="ms-3">
+									<h5 class="mb-0">سیده مهشاد عصمتی مقدم</h5>
+									<p class="mb-0 small">دانشجو</p>
+								</div>
+							</div>
+							<!-- Tags -->
+						</div>
+
+						<!-- Information START -->
+						<div dir="rtl" class="row">
+							<!-- Information item -->
+							<div class="col-md-6">
+								<ul class="list-group list-group-borderless">
+                  <!-- Title -->
+									<li class="list-group-item">
+										<span>محل سکونت:</span>
+										<span class="h6 mb-0">کاشمر</span>
+									</li>
+                  <!-- Full Name -->
+									<li class="list-group-item">
+										<span>تحصیلات:</span>
+										<span class="h6 mb-0">ترم شش مهندسی کامپبوتر</span>
+									</li>
+                  <!-- User Name -->
+									<li class="list-group-item">
+										<span>حوزه فعالیت:</span>
+										<span class="h6 mb-0">ui / ux , frontend , python</span>
+									</li>
+								</ul>
+							</div>
+
+							<!-- Information item -->
+							<div class="col-md-6">
+								<ul class="list-group list-group-borderless">
+                  <!-- Email ID -->
+									<li class="list-group-item">
+										<span>آدرس ایمیل:</span>
+										<span class="h6 mb-0">mahshad.esmati@gmail.com</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

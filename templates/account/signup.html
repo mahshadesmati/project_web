@@ -1,0 +1,57 @@
+{% extends "_base.html" %}
+
+
+{% block title %}
+    ثبت نام
+{% endblock %}
+{% block content %}
+    {% for foo in form %}
+        {{ foo.name }}
+
+    {% endfor %}
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+                    <div class="bg-primary bg-opacity-10 rounded p-4 p-sm-5">
+                        <h2>حساب جدید بسازید</h2>
+                        <!-- Form START -->
+                        <form class="mt-4" action="" method="POST">
+                            {% csrf_token %}
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">ایمیل</label>
+                                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                       placeholder="ایمیل">
+                                <small id="emailHelp" class="form-text">آدرس ایمیل شما محفوظ خواهد ماند.</small>
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputPassword1">نام کاربری</label>
+                                <input name="username" type="text" class="form-control" id="exampleInputPassword1"
+                                       placeholder="نام کاربری خود را وارد کنید">
+                            </div>
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputPassword2">رمز عبور</label>
+                                <input name="password1" type="password" class="form-control" id="exampleInputPassword2" placeholder="*********">
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-sm-4">
+                                    <button type="submit" class="btn btn-success">ثبت نام</button>
+                                </div>
+                                <div class="col-sm-8 text-sm-end">
+                                    <span>حساب دارید؟ <a href="{% url 'account_login' %}"><u>وارد شوید</u></a></span>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Form END -->
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

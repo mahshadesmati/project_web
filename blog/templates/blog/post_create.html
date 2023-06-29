@@ -1,0 +1,97 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% block title %}
+ایجاد پست
+{% endblock %}
+
+{% block content %}
+
+    <section class="py-4">
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-12">
+                    <!-- Title -->
+                    <h1 class="mb-0 h2">ایجاد پست</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <!-- Chart START -->
+                    <div class="card border bg-body-secondary">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <!-- Form START -->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <!-- Main form -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- Post name -->
+                                        <div class="mb-3">
+                                            <label for="id_title" class="form-label">عنوان پست</label>
+                                            <input value="{{ post.title }}" required id="id_title" name="title" type="text" class="form-control" placeholder="عنوان پست">
+                                            <small>پست ها بدون تایید ادمین منتشر خواهند شد</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Short description -->
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">توضیح کوتاه </label>
+                                            <textarea name="short_description" class="form-control" rows="3"
+                                                      placeholder="توضیح مختصری بنویسید">{{ post.short_description }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Main toolbar -->
+                                    <div class="col-md-12">
+                                        <!-- Subject -->
+                                        <div class="mb-3">
+                                            <label class="form-label">توضیحات پست</label>
+                                        </div>
+                                        {{ form.body }}
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <!-- Image -->
+                                            <div class="position-relative">
+                                                <img style="width: 150px;object-fit: contain" src="{{ post.cover.url }}" alt="">
+                                                <h6 class="my-2">تصویر پست را انتخاب کنید</h6>
+                                                <div class="btn btn-secondary rounded rounded-5">
+                                               <label class="form form-label" for="id_cover">انتخاب تصویر</label>
+{#                                                <input name="cover" type="file" class="form-control d-none" id="customFile1" />#}
+                                                <input type="file" name="cover" accept="image/*" id="id_cover" class="form-control d-none">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <!-- Tags -->
+                                        <div class="mb-3">
+                                            <label for="id_tags" class="form-label">برچسب ها</label>
+                                            <textarea id="id_tags" name="tags" dir="ltr" class="form-control" rows="2" placeholder="business, sports ...">
+                                                {{ post.tags.all|removewhitespace }}
+                                            </textarea>
+                                            <small>برچسب ها را انگلیسی وارد کرده و با کاما (,) از هم جدا کنید</small>
+                                        </div>
+                                    </div>
+                                    <!-- Create post button -->
+                                    <div dir="rtl" class="col-md-12">
+                                        <button class="btn btn-success w-200" type="submit">ذخیره</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Form END -->
+                        </div>
+                    </div>
+                    <!-- Chart END -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}

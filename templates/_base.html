@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<!-- Mirrored from blogzine.webestica.com/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 03 May 2023 09:01:05 GMT -->
+<head>
+    <title>{% block title %}
+
+    {% endblock %}</title>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Bootstrap based News, Magazine and Blog Theme">
+
+    <!-- Dark mode -->
+    <script>
+        const storedTheme = localStorage.getItem('theme')
+
+        const getPreferredTheme = () => {
+            if (storedTheme) {
+                return storedTheme
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+
+        const setTheme = function (theme) {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-bs-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        window.addEventListener('DOMContentLoaded', () => {
+            var el = document.querySelector('.theme-icon-active');
+            if (el != 'undefined' && el != null) {
+                const showActiveTheme = theme => {
+                    const activeThemeIcon = document.querySelector('.theme-icon-active use')
+                    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+                    const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+                    document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                        element.classList.remove('active')
+                    })
+
+                    btnToActive.classList.add('active')
+                    activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+                }
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    if (storedTheme !== 'light' || storedTheme !== 'dark') {
+                        setTheme(getPreferredTheme())
+                    }
+                })
+
+                showActiveTheme(getPreferredTheme())
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            localStorage.setItem('theme', theme)
+                            setTheme(theme)
+                            showActiveTheme(theme)
+                        })
+                    })
+
+            }
+        })
+
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo.jpg' %}">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&amp;family=Rubik:wght@400;500;700&amp;display=swap"
+          rel="stylesheet">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/tiny-slider/tiny-slider.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link id="style-switch" rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body dir="rtl">
+
+<!-- =======================
+Header START -->
+<header style="background-color: rgba(255,112,208,0.51)" class="navbar-light navbar-sticky header-static">
+    <!-- Logo Nav START -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo START -->
+            <a class="navbar-brand" href="{% url 'blog:home' %}">
+                <img class="navbar-brand-item light-mode-item" src="{% static 'images/logo.png' %}" alt="logo">
+            </a>
+            <!-- Logo END -->
+
+            <!-- Main navbar START -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Nav Search START -->
+                <div class="nav mt-3 mt-lg-0 px-4 flex-nowrap align-items-center">
+                    <div class="nav-item w-100">
+                        <form action="" method="GET" class="rounded position-relative">
+                            <input name="search" class="form-control pe-5 bg-light" type="search" placeholder="جستجو" aria-label="Search">
+                            <button class="btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y" type="submit"><i
+                                    class="bi bi-search fs-5"> </i></button>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- Nav Search END -->
+                <ul class="navbar-nav navbar-nav-scroll ms-auto">
+                    <!-- Nav item 2 Pages -->
+                    <li style="margin-right: 100px" class="nav-item dropdown">
+                        <a class="nav-link" href="{% url 'blog:about' %}" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">درباره من</a>
+                    </li>
+                    <li style="margin-right: 100px" class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="homeMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">حساب کاربری</a>
+						<ul class="dropdown-menu" aria-labelledby="homeMenu">
+                            {% if user.is_authenticated %}
+                                <li> <a style="text-align: right" class="dropdown-item" href="{% url 'profile' user.id %}">پروفایل</a></li>
+                                <li> <a style="text-align: right" class="dropdown-item" href="{% url 'account_logout' %}">خروج</a></li>
+                            {% else %}
+                                <li> <a style="text-align: right" dir="rtl" class="dropdown-item" href="{% url 'account_login' %}">ورود</a></li>
+                                <li> <a style="text-align: right" dir="rtl" class="dropdown-item" href="{% url 'account_signup' %}">ثبت نام</a></li>
+                            {% endif %}
+
+						</ul>
+					</li>
+                    <li style="margin-right: 100px" class="nav-item dropdown">
+                        <a href="{% url 'blog:post_create' %}" class="nav-link"><i class="material-icons">add</i> افزودن پست</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Main navbar END -->
+        </div>
+    </nav>
+    <!-- Logo Nav END -->
+</header>
+<!-- =======================
+Header END -->
+
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <div class="bg-instagram">
+        <br>
+    </div>
+    <!-- =======================
+    Highlights START -->
+    {% block content %}
+    
+    {% endblock %}
+    <!-- =======================
+    Highlights END -->
+
+
+</main>
+{% include "footer.html" %}
+
+
+
+<div class="back-top"><i class="bi bi-arrow-up-short"></i></div>
+
+
+
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/vendor/tiny-slider/tiny-slider.js"></script>
+
+<script src ="assets/js/functions.js"></script>
+
+</body>
+
+</html>
+
+
+{#<!doctype html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport"#}
+{#          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">#}
+{#    <meta http-equiv="X-UA-Compatible" content="ie=edge">#}
+{#    <title>Document</title>#}
+{##}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">#}
+{#</head>#}
+{#<body>#}
+{#  <nav class="navbar navbar-expand-lg bg-dark-subtle">#}
+{#    <div class="container-fluid d-flex justify-content-center">#}
+{#      <a class="navbar-brand" href="{% url "blog:post_list" %}">Home</a>#}
+{#    </div>#}
+{#  </nav>#}
+{#    {% block content %}#}
+{##}
+{#    {% endblock %}#}
+{#    <p>#}
+{#        <a href="{% url "blog:post_feed" %}">#}
+{#            Subscribe in RSS . . . #}
+{#        </a>#}
+{#    </p>#}
+{##}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>#}
+{#</body>#}
+{#</html>#}

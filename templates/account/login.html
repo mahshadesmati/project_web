@@ -1,0 +1,59 @@
+{% extends "_base.html" %}
+
+{% block title %}
+    ورود
+{% endblock %}
+{% block content %}
+
+    <section dir="rtl">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 col-xl-6 mx-auto">
+                    <div class="p-4 p-sm-5 bg-primary bg-opacity-10 rounded">
+                        <h2>ورود به حساب کاربری</h2>
+                        <!-- Form START -->
+                        <form action="" method="POST" class="mt-4">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                {{ form.non_field_errors }}
+                            {% endif %}
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputEmail1">نام کاربری</label>
+                                <input name="login" type="text" class="form-control" id="exampleInputEmail1" placeholder="Username">
+                            </div>
+                            {% if form.login.errors %}
+                                <div class="error">{{ form.login.errors }}</div>
+                            {% endif %}
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputPassword1">رمز عبور</label>
+                                <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="*********">
+                            </div>
+                            {% if form.password.errors %}
+                                <div class="error">{{ form.password.errors }}</div>
+                            {% endif %}
+
+                            <!-- Button -->
+                            <div class="row align-items-center">
+                                <div class="col-sm-4">
+                                    <button type="submit" class="btn btn-success">ورود</button>
+                                </div>
+                                <div class="col-sm-8 text-sm-end">
+                                    <span>حساب ندارید؟ <a href="{% url 'account_signup' %}"><u>ثبت نام کنید</u></a></span>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Form END -->
+                        <hr>
+                        <!-- Social-media btn -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

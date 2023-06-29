@@ -1,0 +1,80 @@
+{% extends "_base.html" %}
+{% block title %}
+حذف پست
+{% endblock %}
+
+{% block content %}
+    <section class="pt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bg-primary bg-opacity-10 p-4 p-md-5 rounded-3 text-center">
+                        <h1 class="text-primary">آیا میخواهید این پست را حذف کنید؟</h1>
+                        <nav class="d-flex justify-content-center" aria-label="breadcrumb">
+                            <ol class="breadcrumb breadcrumb-dots m-0">
+                                <li class="breadcrumb-item"><a href="{% url 'blog:home' %}"><i class="bi bi-house me-1"></i> صفحه اصلی</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="position-relative pt-0">
+        <div class="container">
+            <div class="row">
+                <!-- Main Post START -->
+                <div class="col-12">
+                    <!-- Card item START -->
+                    <div class="card border rounded-3 up-hover p-4 mb-4">
+                        <div class="row g-3">
+                            <div class="col-lg-3">
+                                <!-- Title -->
+                                <h2 class="card-title">
+                                    <a dir="rtl" href="{{ post.get_absolute_url }}"
+                                       class="btn-link text-reset stretched-link">{{ post.title|truncatechars:50 }}</a>
+                                </h2>
+                                <!-- Author info -->
+                                <div class="d-flex align-items-center position-relative mt-3">
+                                    <div class="avatar me-5">
+                                        <img class="avatar-img rounded-circle" src="{{ post.author.avatar.url }}" alt="avatar">
+                                    </div>
+                                    <div>
+                                        <h5 style="margin-top: 40px" class="me-3"><a href="#"
+                                                                                     class="stretched-link text-reset btn-link">{% if post.author.is_superuser %}
+                                        <i class="bi bi-patch-check-fill text-info small"></i> &nbsp;
+                                        {% endif %}{{ post.author }}</a>
+                                        </h5>
+                                        <hr>
+                                        <ul class="fixed-bottom nav align-items-center small">
+                                            <li class="nav-item me-3">{{ post.datetime_created }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Image -->
+                            <div class="col-md-6 col-lg-3">
+                                <img style="width: 300px;object-fit: contain" class="rounded-3" src="{{ post.cover.url }}" alt="Card image">
+                            </div>
+                            <!-- Detail -->
+                            <div class="col-md-6 col-lg-4">
+                                <p>{{ post.short_description|truncatewords:100 }} </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Card item END -->
+                </div>
+                <!-- Main Post END -->
+            </div> <!-- Row end -->
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="d-sm-grid col-6 mx-auto mt-1">
+                    <button class="btn btn-danger w-100 mt-1" type="submit">بله ، حذف شود.</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}

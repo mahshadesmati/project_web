@@ -1,0 +1,10 @@
+{
+  "platform": "django",
+  "app": "django-starter",
+  "disks": [
+    {
+      "name": "temp",
+      "mountTo": "/tmp"
+    }
+  ]
+}
